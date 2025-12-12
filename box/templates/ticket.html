@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Movie Ticket</title>
+<style>
+        body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at top, #0a0a0f, #000);
+        font-family: 'Poppins', sans-serif;
+      
+        height: 100vh;
+        color: white;
+    }
+    .ticket-page {
+        width: 100%;
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px; /* So it does not overlap navbar */
+    }
+
+    .ticket-box {
+        width: 400px;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 18px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        animation: fadeIn 0.8s ease;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .ticket-box h1 {
+        color: #ff4455;
+        font-size: 28px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 8px #ff4455;
+    }
+
+    .label {
+        font-weight: 600;
+        color: #ffddcc;
+    }
+
+    .value {
+        color: #fff;
+    }
+
+    .download-btn {
+        margin-top: 25px;
+        background: #ff4455;
+        border: none;
+        padding: 12px 20px;
+        width: 80%;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 0 15px rgba(255, 68, 85, 0.4);
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .download-btn:hover {
+        background: #ff2233;
+        box-shadow: 0 0 25px rgba(255, 68, 85, 0.9);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }</style>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ticket-page">
+    <div class="ticket-box">
+        <h1>{{ movie.title }}</h1>
+
+        <p><span class="label">Seat:</span> <span class="value">{{ seat }}</span></p>
+        <p><span class="label">Price:</span> <span class="value">${{ movie.price }}</span></p>
+
+        <a class="download-btn" href="{{ url_for('download', movie_id=movie.id, seat=seat) }}">
+            Download Ticket
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

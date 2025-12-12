@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <style>
+        /* 📌 Book Page Container */
+.book-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* 📌 Title */
+.page-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* 📌 Movie card */
+.movie-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 15px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px #000;
+    margin-bottom: 30px;
+}
+
+.movie-card img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.movie-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.movie-info .price {
+    margin-top: 10px;
+    color: #e60000;
+    font-weight: bold;
+}
+
+/* 📌 Seat Section Title */
+.seat-title {
+    margin: 25px 0 10px;
+    font-size: 1.6rem;
+}
+
+/* 📌 Seat Grid */
+.seats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.seat {
+    background: #333;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.seat:hover {
+    background: #ff2b2b;
+}
+
+/* Selected Seat */
+.seat input[type="radio"]:checked + span,
+.seat input[type="radio"]:checked ~ .seat {
+    background: #af4c4c;
+}
+
+/* Booked Seat */
+.booked {
+    background: #777 !important;
+    cursor: not-allowed;
+    color: #ccc;
+}
+
+/* Hide the radio button */
+.seat input[type="radio"] {
+    display: none;
+}
+
+/* 📌 Confirm Button */
+.confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: #ff0000;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.confirm-btn:hover {
+    background: #cc0000;
+}
+
+    </style>
+
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+
+<div class="book-container">
+
+    <h1 class="page-title">Book Movie: {{ movie.title }}</h1>
+
+    <div class="movie-card">
+        <img src="{{ movie.img }}" alt="{{ movie.title }}">
+        <div class="movie-info">
+            <h2>{{ movie.title }}</h2>
+           
+        </div>
+    </div>
+
+    <h2 class="seat-title">Select a Seat</h2>
+
+    <form action="{{ url_for('confirm') }}" method="POST" class="seat-form">
+        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+
+        <div class="seats-grid">
+            {% for seat in seats %}
+                {% if seat.is_booked %}
+                    <label class="seat booked">
+                        <input type="radio" disabled>
+                        {{ seat.seat_number }}
+                    </label>
+                {% else %}
+                    <label class="seat">
+                        <input type="radio" name="seat" value="{{ seat.seat_number }}">
+                        {{ seat.seat_number }}
+                    </label>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="confirm-btn">Confirm Booking</button>
+    </form>
+
+</div>
+
+{% endblock %}
+
+</body>
+</html>

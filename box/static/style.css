@@ -1,0 +1,74 @@
+/* Reset + base */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body { background: #050505; color: #fff; -webkit-font-smoothing: antialiased; }
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  padding: 14px 30px;
+  background: rgba(15,15,15,0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.logo { color: #ff4455; font-weight: 800; font-size: 20px; text-decoration: none; }
+.nav-links { display:flex; gap:20px; list-style:none; margin:0; padding:0; align-items:center;}
+.nav-links a { color:#fff; text-decoration:none; opacity:0.95; transition:0.2s; }
+.nav-links a:hover { color:#ff4455; text-shadow:0 0 6px rgba(255,68,85,0.25); }
+
+/* search input in navbar */
+.nav-search { padding:8px 12px; border-radius:8px; border:none; width:260px; background:#111; color:#fff; }
+
+/* Banner / Swiper */
+.banner-swiper { width:100%; height: 62vh; margin-bottom: 18px; }
+.banner-slide { background-size: cover; background-position:center; position:relative; display:flex; align-items:center; }
+.banner-overlay { position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 60%); }
+.banner-content { position:relative; z-index:2; left:40px; color:#fff; max-width:700px; }
+.banner-content h1 { font-size:40px; margin-bottom:8px; text-shadow:0 6px 30px rgba(0,0,0,0.6); }
+.banner-cta { display:inline-block; margin-top:12px; background:#ff4455; color:#fff; padding:12px 20px; border-radius:8px; text-decoration:none; }
+
+/* page container */
+.page-container { padding: 28px 36px; }
+
+/* movie grid */
+.movie-grid { display:grid; gap:24px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); padding: 10px 36px 60px 36px; }
+.movie-card { position:relative; border-radius:12px; overflow:hidden; background:#0a0a0a; transition: transform .25s ease; }
+.movie-card:hover { transform: translateY(-6px); }
+.movie-card img { width:100%; height:320px; object-fit:cover; display:block; }
+.overlay { position:absolute; bottom:0; left:0; right:0; padding:12px; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.0)); color:#fff; display:flex; flex-direction:column; gap:8px; align-items:center; opacity:1; }
+.book-btn { background:#ff4455; color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; }
+
+/* modal */
+.modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; z-index:400; }
+.modal-content { width:90%; max-width:480px; background:#111; padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); color:#fff; }
+.close { float:right; cursor:pointer; font-size:22px; }
+.screen { height:18px; background:#ccc; border-radius:6px; margin:12px 0; }
+.seats-container { display:grid; gap:8px; grid-template-columns: repeat(8,1fr); }
+.seat { padding:8px; background:#333; border-radius:6px; text-align:center; cursor:pointer; color:#fff; }
+.seat.selected { background:#ff4455; }
+.seat.booked { background:#555; cursor:not-allowed; }
+
+/* ticket page */
+.ticket-page { display:flex; justify-content:center; align-items:center; min-height:70vh; }
+.ticket-box { width:420px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:22px; border-radius:14px; border:1px solid rgba(255,255,255,0.04); box-shadow: 0 8px 30px rgba(0,0,0,0.6); text-align:center; }
+.ticket-box h1 { color:#ff4455; text-shadow:0 0 10px rgba(255,68,85,0.2); }
+.label { color:#ffdccc; font-weight:600; }
+.value { color:#fff; }
+
+/* small utilities */
+.page-title { padding: 22px 36px; font-size:28px; font-weight:600; }
+.divider { height:1px; background:rgba(255,255,255,0.06); margin:16px 0; }
+
+/* responsive */
+@media (max-width: 760px) {
+  .banner-content h1 { font-size:24px; left:24px; }
+  .nav-search { width: 140px; }
+  .seats-container { grid-template-columns: repeat(6, 1fr); }
+  .movie-card img { height:220px; }
+}
